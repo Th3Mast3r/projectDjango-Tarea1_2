@@ -1,0 +1,299 @@
+Antiguo forms (generico)
+<section>
+    <div class="lightBg">
+      <div class="container">
+          <form id="ReviewForm" method="POST" action="/review-create/">
+          {% csrf_token %}
+              <label for="author">Author</label>
+              {{form.author}}
+              
+              <label for="name">Name</label>
+              {{form.name}}
+  
+              <label for="description">Description</label>
+              {{form.description}}
+  
+              <label for="message">Body Blog</label>
+              {{form.message}}
+  
+              <label for="image">Imagen</label>
+              {{form.image}}
+  
+              <input class='btn btnPrimary' type="submit" value="Submit">
+          </form>
+      </div>
+    </div>
+  </section>
+
+
+Fuente bonita de contact con todo al centro
+  <div class="text-center mb-5">
+    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-envelope"></i></div>
+    <h1 class="fw-bolder">Send Your Reviews</h1>
+    <p class="lead fw-normal text-muted mb-0">asd</p>
+</div>
+
+Parte del header muy simple
+<section>
+    <div class="innerPageBannerCol">
+      <div class="container">
+        <div class="row g-4 g-md-3  align-items-center">
+          <div class="col-md-6">
+            <div class="bannerContent">
+              <h1 class="xlTitle pb-md-3">Create Your Review</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Phone number input-->
+  <div class="form-floating mb-3">
+    <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
+    <label for="phone">Phone number</label>
+    <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+</div>
+
+<form id="contactForm" data-sb-form-api-token="API_TOKEN" method="POST" action="/review-create/">
+    <!-- Name input-->
+    <div class="form-floating mb-3">
+        <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+        <label for="name">Full name</label>
+        <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+        
+    </div>
+    <!-- Email address input-->
+    <div class="form-floating mb-3">
+        <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
+        <label for="email">Email address</label>
+        <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+        <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+        
+    </div>
+    <!-- Message input-->
+    <div class="form-floating mb-3">
+        <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
+        <label for="subject">Message</label>
+        <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+        
+    </div>
+
+ <section class="py-5">
+      <div class="container px-5">
+          <div class="row gx-5 justify-content-center">
+              <div class="col-lg-8 col-xl-6">
+                  <!-- * * * * * * * * * * * * * * *-->
+                  <!-- * * SB Forms Contact Form * *-->
+                  <!-- * * * * * * * * * * * * * * *-->
+                  <!-- This form is pre-integrated with SB Forms.-->
+                  <!-- To make this form functional, sign up at-->
+                  <!-- https://startbootstrap.com/solution/contact-forms-->
+                  <!-- to get an API token!-->
+                  <form id="ReviewForm" method="POST" action="/review-create/">
+                    {% csrf_token %}
+                      <!-- Name input-->
+                      <div class="form-floating mb-3">
+                          <input class="form-control" {{form.name}}/>
+                          <label for="name">Full name</label>
+                          <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                          
+                      </div>
+                      <!-- Email address input-->
+                      <div class="form-floating mb-3">
+                          <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
+                          <label for="email">Email address</label>
+                          <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                          <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                          
+                      </div>
+                      <!-- Message input-->
+                      <div class="form-floating mb-3">
+                          <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
+                          <label for="subject">Message</label>
+                          <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                          
+                      </div>
+                      
+                      <div class="row gx-5 justify-content-center">
+                        <input class='btn btnPrimary' type="submit" value="Submit">
+                      </div>
+                  </form>
+              </div>
+          </div>
+  </div>
+</section>
+
+
+partes quitada para despues poner:
+ <!-- reviews section-->
+ <section>
+  <div class="sectionSpace">
+    <div class="container">
+      <div class="reviewCol">
+        <div class="row pb-3">
+          <div class="col">
+            <h4 class="smText regular">Reviews</h4>
+          </div>
+          <div class="col-auto">
+            <a href="{% url 'main:reviews' %}" class="simpleLink">View all</a>
+          </div>
+        </div>
+        
+        <div class="reviewCard">
+          <div class="row g-4 align-items-center">
+          {% for p in reviews %}
+          {% if p.is_active %}
+            <div class="col-md-auto">
+              <div class="reviewImgCol">
+                <a href="{% url 'main:review' slug=p.slug %}"><img src="{{p.image.url}}" alt="..." wight = 120px height = auto></a>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="reviewContentCol">
+                <h4 class="lgTitle"><a href="{% url 'main:review' slug=p.slug %}">{{p.name}}</a></h4>
+                <ul class="reviewOption">
+                  <li><span class="dateLbl">{{p.date.year}}</span></li>
+                </ul>
+                <p>{{p.description}}</p>
+              </div>
+            </div>
+          {% endif %}
+          {% endfor %}
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Blog section-->
+<section>
+  <div class="innerPageBannerColI">
+    <div class="sectionSpace">
+      <div class="container">
+        <div class="reviewCol">
+          <div class="row pb-3">
+            <div class="col">
+              <h4 class="smText regular">Blogs</h4>
+            </div>
+            <div class="col-auto">
+              <a href="{% url 'main:blogs' %}" class="simpleLink">View all</a>
+            </div>
+          </div>
+        
+          <div class="portfolioCard">
+            <div class="row g-5 align-items-center">
+            {% for p in blogs %}
+            {% if p.is_active %}
+              <div class="col-md-auto">
+                <div class="portfolioImgCol">
+                  <a href="{% url 'main:blog' slug=p.slug %}"><img src="{{p.image.url}}" alt="..." wight = 120px height = auto></a>
+                </div>
+              </div>
+              <div class="col-md">
+                <div class="portfolioContentCol">
+                  <h4 class="lgTitle"><a href="{% url 'main:blog' slug=p.slug %}">{{p.name}}</a></h4>
+                  <ul class="portfolioOption">
+                    <li><span class="dateLbl">{{p.date.year}}</span></li>
+                  </ul>
+                  <p>{{p.description}}</p>
+                </div>
+              </div>
+            {% endif %}
+            {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<form id="BlogForm" method="POST" action="{% url 'main:blogaddinfo' %}", enctype="multipart/form-data">
+  {% csrf_token %}
+      <label for="author">Author</label>
+      {{form.author}}
+
+      <label for="name">Name</label>
+      {{form.name}}
+
+      <label for="description">Description</label>
+      {{form.description}}
+
+      <label for="body">Body</label>
+      {{form.body}}
+
+      <label for="image">Image</label>
+      {{form.image}}
+      <br>
+      <br>
+
+      <input class='btn btnPrimary' type="submit" value="Submit">
+  </form>
+
+
+  <form id="contactForm" method="POST" action="/contact/">
+    {% csrf_token %}
+    <br>
+        <label for="name">Name</label>
+        {{form.name}}
+
+        <label for="email">Email</label>
+        {{form.email}}
+
+        <label for="subject">Message</label>
+        {{form.message}}
+
+        <input class='btn btnPrimary' type="submit" value="Submit">
+        <br>
+        <br>
+    </form>
+
+
+    {% block content %}
+    <section>
+      <div class="innerPageBannerCol">
+        <div class="container">
+          <div class="row g-4 g-md-2  align-items-center">
+            <div class="col-md-6">
+              <div class="bannerContent">
+                <h1 class="xlTitle pb-md-3">Contact us below</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section>
+      <div class="lightBg">
+        <div class="container">
+          <form id="BlogForm" method="POST" action="{% url 'main:blogaddinfo' %}", enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="author">Author</label>
+            {{form.author}}
+      
+            <label for="name">Name</label>
+            {{form.name}}
+      
+            <label for="description">Description</label>
+            {{form.description}}
+      
+            <label for="body">Body</label>
+            {{form.body}}
+      
+            <label for="image">Image</label>
+            {{form.image}}
+            <br>
+            <br>
+      
+            <input class='btn btnPrimary' type="submit" value="Submit">
+                <br>
+                <br>
+            </form>
+        </div>
+      </div>
+    </section>
